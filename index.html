@@ -122,6 +122,60 @@
                 <h1 class="text-4xl md:text-7xl font-extrabold text-slate-900 mb-8 leading-tight tracking-tight">
                     India's Most Popular & Trusted EdTech Brand in <span class="text-cyan-600">Professional Studies !</span>
                 </h1>
+                <a id="monthlyBtn" href="#" target="_blank">
+  <button id="btnText">Loading...</button>
+</a>
+
+<style>
+  #btnText {
+    background-color: cyan;
+    color: black;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  #btnText:hover {
+    opacity: 0.85;
+    transform: scale(1.05);
+  }
+</style>
+
+<script>
+async function loadButton() {
+
+  const sheetURL =
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQWlzX2wtFSOZAvLbSX3bKSf2S0WGjtdECwMGp7ppuA4ewG7A1JPw0od3yIjtmFdIKPjcYxx8mpLGzn/pub?gid=0&single=true&output=csv";
+
+  try {
+
+    const response = await fetch(sheetURL);
+    const data = await response.text();
+
+    // Split rows
+    const rows = data.trim().split("\n");
+
+    // Second row contains values
+    const values = rows[1].split(",");
+
+    const text = values[0];
+    const url = values[1];
+
+    // Update button
+    document.getElementById("btnText").innerText = text;
+    document.getElementById("monthlyBtn").href = url;
+
+  } catch (error) {
+    console.error("Error loading sheet:", error);
+  }
+}
+
+loadButton();
+</script>
                 
                 
                 <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
